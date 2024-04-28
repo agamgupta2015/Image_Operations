@@ -115,7 +115,7 @@ def morphylogoy_operations():
 
         elif operation == "Hit-or-Miss Transform":
             kernel = np.array([
-                [ 0, 0,  0],
+                [ 1, 0,  0],
                 [ 0, 1,  1],
                 [ 0, -1, 0]
             ], dtype=np.int8)
