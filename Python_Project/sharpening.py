@@ -40,7 +40,6 @@ def laplacian_of_gaussian(image, sigma=1.0):
 
 
 def pil_to_numpy(image):
-    # Convert PIL Image to numpy array
     return np.array(image)
 
 

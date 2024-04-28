@@ -8,6 +8,7 @@ from edge_detection import edge_decection
 from morphology import morphylogoy_operations
 from smoothing import smoothing_filters
 from intensity import intensity_transformation,load_equalization
+from realtime import realtime
 
 html_header = """
     <div style="background-color:#f0f0f0;padding:10px;border-radius:10px;">
@@ -77,7 +78,7 @@ def main():
 
     selected_box = st.sidebar.selectbox(
     'Choose one of the following',
-    ('Welcome','Intensity Transformation','Histogram Equalization','Smoothing Filters','Sharpening Filters','Edge Detection Filters','Frequency Domain Filters','Morphological Operations'))
+    ('Welcome','Intensity Transformation','Histogram Equalization','Smoothing Filters','Sharpening Filters','Edge Detection Filters','Frequency Domain Filters','Morphological Operations','Real Time Edge-Detection',))
 
     if selected_box=='Welcome':
         welcome()
@@ -93,6 +94,8 @@ def main():
         morphylogoy_operations()
     if selected_box=='Smoothing Filters':
         smoothing_filters()
+    if selected_box=='Real Time Edge-Detection':
+        realtime()
         
 
 
