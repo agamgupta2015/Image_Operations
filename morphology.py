@@ -2,7 +2,7 @@ import streamlit as st
 import cv2
 import numpy as np
 from PIL import Image
-
+# Morphological Operations for Binary Images
 def dilation(image, kernel_size=(3, 3)):
     kernel = np.ones(kernel_size, np.uint8)
     return cv2.dilate(image, kernel, iterations=1)
