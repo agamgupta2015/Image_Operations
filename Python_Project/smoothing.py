@@ -37,6 +37,7 @@ html_header = """
 st.markdown(html_header, unsafe_allow_html=True)
 
 def smoothing_filters():
+    st.markdown("<h1 style='text-align: center;'>SMOOTHING FILTERS</h1>", unsafe_allow_html=True)
     uploaded_image = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png",'tif'])
 
     if uploaded_image is not None:

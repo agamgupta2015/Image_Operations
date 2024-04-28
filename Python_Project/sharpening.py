@@ -46,6 +46,7 @@ def pil_to_numpy(image):
 
 
 def sharpening():
+    st.markdown("<h1 style='text-align: center;'>SHARPENING FILTERS </h1>", unsafe_allow_html=True)
     uploaded_image = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
     
     if uploaded_image is not None:

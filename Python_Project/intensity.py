@@ -75,7 +75,8 @@ def histogram_equalization(image):
     return equalized_img
 
 
-def load_equalization():    
+def load_equalization():
+    st.markdown("<h1 style='text-align: center;'>HISTOGRAM EQUALIZTION </h1>", unsafe_allow_html=True)    
     uploaded_image = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
     
     if uploaded_image is not None:
@@ -112,6 +113,7 @@ def load_equalization():
 
 
 def intensity_transformation():
+    st.markdown("<h1 style='text-align: center;'>INTENSITY TRANSFORMATION </h1>", unsafe_allow_html=True)
     uploaded_image = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png", "tif"])
 
     if uploaded_image is not None:
