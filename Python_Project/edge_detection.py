@@ -50,6 +50,7 @@ def zero_crossing_edge_detector(image, threshold=0.1):
 
 
 def edge_decection():
+    st.markdown("<h1 style='text-align: center;'>EDGE DETECTION FILTERS </h1>", unsafe_allow_html=True)
     uploaded_image = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png",'tif'])
     
     if uploaded_image is not None:

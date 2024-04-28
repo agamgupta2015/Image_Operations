@@ -80,7 +80,7 @@ def thickening(image):
     return thickened
 
 def morphylogoy_operations():
-    st.title("Morphological Operations App")
+    st.markdown("<h1 style='text-align: center;'>MORPHOLOGICAL OPERATIONS </h1>", unsafe_allow_html=True)
 
     uploaded_image = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png",'tif'])
 
