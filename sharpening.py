@@ -13,12 +13,16 @@ def laplacian_filter(image):
     return filtered_image
 
 def unsharp_masking(image, sigma=1.0, strength=1.5):
+    if image.mode != 'L':
+        image = image.convert('L')  # Convert to grayscale if not already in that mode
     blurred = image.filter(ImageFilter.GaussianBlur(sigma))
     unsharp_image = ImageChops.difference(image, blurred)
     unsharp_image = ImageChops.add(image, unsharp_image, strength, 0)
     return unsharp_image
 
 def high_boost_filter(image, sigma=1.0, boost_factor=2.0):
+    if image.mode != 'L':
+        image = image.convert('L')  # Convert to grayscale if not already in that mode
     blurred = image.filter(ImageFilter.GaussianBlur(sigma))
     sharpened = ImageChops.subtract(image, blurred)
     boosted = ImageChops.add(image, sharpened, boost_factor, 0)
@@ -46,12 +50,12 @@ def pil_to_numpy(image):
 
 def sharpening():
     st.markdown("<h1 style='text-align: center;'>SHARPENING FILTERS </h1>", unsafe_allow_html=True)
-    uploaded_image = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
+    uploaded_image = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png",'tif'])
     
     if uploaded_image is not None:
         image = Image.open(uploaded_image)
         
-        selected_function = st.selectbox('Select a sharpening filter', ['Laplacina Filter','Unsharp Masking','High Boost Filter','Gradient Filter','Laplacian Of Gaussian (LOG) filter'])
+        selected_function = st.selectbox('Select a sharpening filter', ['Laplacian Filter','Unsharp Masking','High Boost Filter','Gradient Filter','Laplacian Of Gaussian (LOG) filter'])
         st.image(image,caption='Original Image', use_column_width=True)
         if selected_function == 'Laplacian Filter':
             laplacian_img = laplacian_filter(image)

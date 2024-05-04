@@ -5,7 +5,6 @@ import streamlit as st
 
 
 def pil_to_numpy(image):
-    # Convert PIL Image to numpy array
     return np.array(image)
 
 def sobel_filter(image):
@@ -29,6 +28,7 @@ def canny_edge_detector(image, sigma=1.0, low_threshold=0.1, high_threshold=0.2)
     image_np = pil_to_numpy(image)
     canny_img = feature.canny(image_np, sigma=sigma, low_threshold=low_threshold, high_threshold=high_threshold)
     return Image.fromarray((canny_img * 255).astype(np.uint8))
+    # return canny_img
 
 def scharr_operator(image):
     image_np = pil_to_numpy(image)
@@ -56,7 +56,7 @@ def edge_decection():
     if uploaded_image is not None:
         image = Image.open(uploaded_image)
         
-        selected_function = st.selectbox('Select a Edge Decection Filter', ['Sobel Filter','Prewitt Filter','Robert Cross Operator','Canny Edge Detection','Scharr Operator',
+        selected_function = st.selectbox('Select a Edge Decection Filter', ['Sobel Filter','Prewitt Filter','Robert Cross Operator','Canny Edge Detector','Scharr Operator',
                                                                     'Marr-Hildreth Edge Detector','Zero Crossing Edge Detector'])
         st.image(image,caption='Original Image', use_column_width=True)
         
@@ -68,7 +68,7 @@ def edge_decection():
             prewitt_img = prewitt_filter(image)
             st.image(prewitt_img, caption='Prewitt Filtered Image', use_column_width=True)
 
-        elif selected_function == 'Roberts Cross Operator':
+        elif selected_function == 'Robert Cross Operator':
             roberts_img = roberts_cross_operator(image)
             st.image(roberts_img, caption='Roberts Cross Operator Filtered Image', use_column_width=True)
 

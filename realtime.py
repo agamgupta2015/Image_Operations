@@ -1,13 +1,12 @@
 import streamlit as st
 import cv2
 import numpy as np
-import time
 from threading import Thread, Lock
 import queue
 
 class Filters:
-    def __init__(self, st):
-        self.st = st
+    def __init__(self):
+        pass
 
     def canny_edge_detection(self, frame):
         gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -28,13 +27,12 @@ def realtime():
     # Menu with filter options
     filter_options = ["Original", "Canny Edge Detection"]
     selected_filter = st.sidebar.radio("Select Filter", filter_options)
-    # selected_filter = st.selectbox('Select filter',["Original", "Canny Edge Detection"])
-    # Initialize camera capture with increased frame rate
-    cap = cv2.VideoCapture(0)
-    cap.set(cv2.CAP_PROP_FPS, 10)
 
+    # Initialize camera capture
+    cap = cv2.VideoCapture(0)
+    
     # Initialize Filters object
-    filter = Filters(st)
+    filter = Filters()
 
     # Placeholder for the displayed image
     displayed_image = st.empty()
@@ -64,10 +62,9 @@ def realtime():
         else:
             filtered_frame = frame
 
-        # Convert the filtered frame to JPEG format
-        _, buffer = cv2.imencode('.jpg', filtered_frame)
-        filtered_frame_jpg = buffer.tobytes()
-
         # Display the filtered frame
-        displayed_image.image(filtered_frame_jpg, caption="", channels="BGR")
+        displayed_image.image(filtered_frame, channels="BGR")
+
+    # Release the camera when the app is closed
     cap.release()
+
