@@ -64,7 +64,7 @@ def edge_decection():
 
         # Display original image in the first column
         with col1:
-            st.image(image, caption='Original Image', width=250)
+            st.image(image, caption='Original Image', width=300)
 
         # Display filtered image in the second column
         with col2:
