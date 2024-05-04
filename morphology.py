@@ -59,7 +59,7 @@ def bottom_hat(image, kernel_size=(3, 3)):
     closing = cv2.morphologyEx(image, cv2.MORPH_CLOSE, kernel)
     return cv2.subtract(closing, image)
 
-def main():
+def morphylogoy_operations():
     st.title("Morphological Operations App")
 
     uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png","tif"])
