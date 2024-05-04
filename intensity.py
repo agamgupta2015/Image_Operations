@@ -128,9 +128,10 @@ def intensity_transformation():
 
         # Radio buttons for different image processing functions
         selected_function = st.radio('Select an image processing function', ['Thresholding', 'Log Transformation', 'Gamma Transformation'])
-        threshold_value = st.slider("Threshold Value", min_value=0, max_value=255, value=127)
-        col1,col2 = st.columns(2)
+        
         if selected_function == 'Thresholding':
+            threshold_value = st.slider("Threshold Value", min_value=0, max_value=255, value=127)
+            col1,col2 = st.columns(2)
             with col1:
                 thresholded_img = thresholding(image, threshold_value)
                 st.image(thresholded_img, caption='Thresholded Image', width=300)
@@ -147,6 +148,7 @@ def intensity_transformation():
 
         elif selected_function == 'Log Transformation':
             c_value = st.slider("C Value", min_value=1, max_value=100, value=1)
+            col1,col2 = st.columns(2)
             with col1:
                 log_transformed_img = log_transformation(image, c_value)
                 st.image(log_transformed_img, caption='Log Transformed Image', width=300)
@@ -165,6 +167,7 @@ def intensity_transformation():
 
         elif selected_function == 'Gamma Transformation':
             gamma_value = st.slider("Gamma Value", min_value=0.1, max_value=5.0, value=1.0, step=0.1)
+            col1,col2 = st.columns(2)
             with col1:
                 gamma_transformed_img = gamma_transformation(image, gamma_value)
                 st.image(gamma_transformed_img, caption='Gamma Transformed Image', width=300)
