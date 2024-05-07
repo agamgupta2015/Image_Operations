@@ -19,26 +19,30 @@ def prewitt_filter(image):
     prewitt_img = filters.prewitt(image_np)
     return prewitt_img
 
-def roberts_cross_operator(image):
+def roberts_cross_operator(image): # [1,0] [0,-1]
     image_np = pil_to_numpy(image)
     roberts_img = filters.roberts(image_np)
     return roberts_img
 
-def canny_edge_detector(image, sigma=1.0, low_threshold=0.1, high_threshold=0.2):
+def canny_edge_detector(image, sigma=4, low_threshold=0.04, high_threshold=0.10):
     image_np = pil_to_numpy(image)
+    image_np = image_np.astype(np.float64)
+    image_np /= 255.0
     canny_img = feature.canny(image_np, sigma=sigma, low_threshold=low_threshold, high_threshold=high_threshold)
     return Image.fromarray((canny_img * 255).astype(np.uint8))
     # return canny_img
 
-def scharr_operator(image):
+def scharr_operator(image):  # [-3 0 3; -10 0 10; -3 0 3]
     image_np = pil_to_numpy(image)
     scharr_img = filters.scharr(image_np)
     return scharr_img
 
-def marr_hildreth_edge_detector(image, sigma=1.0, threshold=0.1):
+def marr_hildreth_edge_detector(image, sigma=1.0, threshold=0.01):
     image_np = pil_to_numpy(image)
     marr_hildreth_img = filters.gaussian(image_np, sigma=sigma)
+    st.image(marr_hildreth_img, caption='Gaussian on Marr-Hildreth',  width=300)
     marr_hildreth_img = filters.laplace(marr_hildreth_img)
+    
     marr_hildreth_img = np.where(np.abs(marr_hildreth_img) > threshold, 255, 0).astype(np.uint8)
     return marr_hildreth_img
 
@@ -58,15 +62,21 @@ def edge_decection():
         
         selected_function = st.selectbox('Select an Edge Detection Filter', ['Sobel Filter','Prewitt Filter','Robert Cross Operator','Canny Edge Detector','Scharr Operator',
                                                                     'Marr-Hildreth Edge Detector','Zero Crossing Edge Detector'])
+        
+        if selected_function == 'Canny Edge Detector':
+            sigma = st.slider("Sigma", min_value=0.1, max_value=10.0, value=4.0)
+            low_threshold = st.slider("Low Threshold", min_value=0.01, max_value=0.99, value=0.04)
+            high_threshold = st.slider("High Threshold", min_value=0.01, max_value=0.99, value=0.10)
 
-        # Display original and filtered images side by side
+        elif selected_function == 'Marr-Hildreth Edge Detector':
+            sigma = st.slider("Sigma", min_value=0.1, max_value=10.0, value=4.0)
+            threshold = st.slider("Threshold", min_value=0.001, max_value=0.02, value=0.001)
+
         col1, col2 = st.columns(2)
 
-        # Display original image in the first column
         with col1:
             st.image(image, caption='Original Image', width=300)
 
-        # Display filtered image in the second column
         with col2:
             if selected_function == 'Sobel Filter':
                 sobel_img = sobel_filter(image)
@@ -79,9 +89,13 @@ def edge_decection():
             elif selected_function == 'Robert Cross Operator':
                 roberts_img = roberts_cross_operator(image)
                 st.image(roberts_img, caption='Roberts Cross Operator Filtered Image',  width=300)
-
+                
             elif selected_function == 'Canny Edge Detector':
-                canny_img = canny_edge_detector(image)
+                # col1,col2 = st.columns(2)
+                # sigma = st.slider("Sigma", min_value=0.1, max_value=10.0, value=4.0)
+                # low_threshold = st.slider("Low Threshold", min_value=0.01, max_value=0.99, value=0.04)
+                # high_threshold = st.slider("High Threshold", min_value=0.01, max_value=0.99, value=0.10)
+                canny_img = canny_edge_detector(image, sigma=sigma, low_threshold=low_threshold, high_threshold=high_threshold)
                 st.image(canny_img, caption='Canny Edge Detector Filtered Image',  width=300)
 
             elif selected_function == 'Scharr Operator':
@@ -89,7 +103,9 @@ def edge_decection():
                 st.image(scharr_img, caption='Scharr Operator Filtered Image',  width=300)
 
             elif selected_function == 'Marr-Hildreth Edge Detector':
-                marr_hildreth_img = marr_hildreth_edge_detector(image)
+                # sigma = st.slider("Sigma", min_value=0.1, max_value=10.0, value=4.0)
+                # threshold = st.slider("Threshold", min_value=0.001, max_value=0.02, value=0.001)
+                marr_hildreth_img = marr_hildreth_edge_detector(image,sigma=sigma,threshold=threshold)
                 st.image(marr_hildreth_img, caption='Marr-Hildreth Edge Detector Filtered Image',  width=300)
 
             elif selected_function == 'Zero Crossing Edge Detector':

@@ -68,3 +68,5 @@ def realtime():
     # Release the camera when the app is closed
     cap.release()
 
+
+

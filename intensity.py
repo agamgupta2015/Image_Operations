@@ -8,61 +8,46 @@ import matplotlib.pyplot as plt
 def calculate_histogram(image):
     # Convert image to grayscale
     img_gray = image.convert('L')
-    
     # Convert image to numpy array
     img_array = np.array(img_gray)
-    
     # Calculate histogram
     hist, bins = np.histogram(img_array.flatten(), bins=256, range=[0, 256])
-    
     return hist, bins
 
 def thresholding(image, threshold_value):
     # Convert image to grayscale
     img_gray = image.convert('L')
-    
     # Convert image to numpy array
     img_array = np.array(img_gray)
-    
     # Apply thresholding
     thresholded_img = np.where(img_array > threshold_value, 255, 0)
-    
     return Image.fromarray(thresholded_img.astype(np.uint8))
 
 def log_transformation(image, c):
     # Convert image to grayscale
     img_gray = image.convert('L')
-    
     # Convert image to numpy array
     img_array = np.array(img_gray)
-    
     # Apply log transformation
     log_transformed_img = c * np.log(1 + img_array)
-    
     return Image.fromarray(log_transformed_img.astype(np.uint8))
 
 def gamma_transformation(image, gamma):
     # Convert image to grayscale
     img_gray = image.convert('L')
-    
     # Convert image to numpy array
     img_array = np.array(img_gray)
-    
     # Apply gamma transformation
     gamma_transformed_img = np.power(img_array / 255, gamma) * 255
-    
     return Image.fromarray(gamma_transformed_img.astype(np.uint8))
 
 def histogram_equalization(image):
     # Convert image to grayscale
     img_gray = image.convert('L')
-    
     # Convert image to numpy array
     img_array = np.array(img_gray)
-    
     # Calculate histogram
     hist, bins = np.histogram(img_array.flatten(), bins=256, range=[0, 256])
-    
     # Calculate cumulative distribution function (CDF)
     cdf = hist.cumsum()
     cdf_normalized = cdf / cdf.max()
