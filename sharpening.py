@@ -75,6 +75,7 @@ from PIL import Image, ImageFilter, ImageChops
 import numpy as np
 import streamlit as st
 import re
+import matplotlib.pyplot as plt
 
 def laplacian_filter(image):
     kernel = np.array([[0, 1, 0],
@@ -163,13 +164,22 @@ def sharpening():
         with col2:
             count = 1
             for filter_name in selected_filters:
-                    if count%2==0:
-                        with col1:
-                            filtered_img = apply_filter(image, filter_name)
-                            st.image(filtered_img, caption=filter_name, width=300)
-                            count = count+1
-                    else:
-                        with col2:
-                            filtered_img = apply_filter(image, filter_name)
-                            st.image(filtered_img, caption=filter_name, width=300)
-                            count = count+1
+                with st.expander(filter_name):
+                    filtered_img = apply_filter(image, filter_name)
+                    st.image(filtered_img, caption=filter_name, width=300, use_column_width=True, output_format='JPEG')
+                    if st.button(f"Show Histogram {filter_name}"):
+                        plt.hist(np.array(filtered_img).flatten(), bins=256, color='blue', alpha=0.7)
+                        st.pyplot()
+        # with col2:
+        #     count = 1
+        #     for filter_name in selected_filters:
+        #             if count%2==0:
+        #                 with col1:
+        #                     filtered_img = apply_filter(image, filter_name)
+        #                     st.image(filtered_img, caption=filter_name, width=300)
+        #                     count = count+1
+        #             else:
+        #                 with col2:
+        #                     filtered_img = apply_filter(image, filter_name)
+        #                     st.image(filtered_img, caption=filter_name, width=300)
+        #                     count = count+1
