@@ -81,7 +81,11 @@ def smoothing_filters():
         image = Image.open(uploaded_image).convert('L') 
         col1, col2 = st.columns(2)
         with col1:
-            st.image(image, caption='Original Image', width=300)
+            with st.expander('Original Image'):
+                st.image(image, caption='Original Image', width=300)
+                if st.button(f"Show Histogram"):
+                        plt.hist(np.array(image).flatten(), bins=256, color='blue', alpha=0.7)
+                        st.pyplot()
         
         with col2:
             count = 1

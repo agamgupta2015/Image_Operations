@@ -5,7 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sharpening import sharpening
 from edge_detection import edge_decection
-from morphology import morphylogoy_operations
+from morph import morph
 from smoothing import smoothing_filters
 from intensity import intensity_transformation,load_equalization
 from realtime import realtime
@@ -90,7 +90,7 @@ def main():
     if selected_box=='Edge Detection Filters':
         edge_decection()
     if selected_box=='Morphological Operations':
-        morphylogoy_operations()
+        morph()
     if selected_box=='Smoothing Filters':
         smoothing_filters()
     if selected_box=='Real Time Edge-Detection':
