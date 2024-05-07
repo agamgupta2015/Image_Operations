@@ -59,7 +59,7 @@ def smoothing_filters():
     option = st.radio("Choose an option:", ['Select from dropdown', 'Write a prompt'])
 
     if option == 'Select from dropdown':
-        selected_filter = st.selectbox('Select a sharpening filter', ['Mean Filter', 'Gaussian Filter','Median Filter'])
+        selected_filter = st.selectbox('Select a smoothing filter', ['Mean Filter', 'Gaussian Filter','Median Filter'])
         st.write("Selected filter:", selected_filter)
         user_prompt = selected_filter
     elif option == 'Write a prompt':
