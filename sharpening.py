@@ -70,7 +70,7 @@
 #                 st.image(gradient_img, caption='Gradient Filtered Image', width=300)
 
 
-from skimage import filters, feature
+# from skimage import filters, feature
 from PIL import Image, ImageFilter, ImageChops
 import numpy as np
 import streamlit as st
